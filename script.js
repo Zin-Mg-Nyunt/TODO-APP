@@ -28,7 +28,6 @@ taskInput.addEventListener("change", () => {
 
 let filter = "all";
 let filterTask = [];
-// let dataArr = [];
 const updateLocalStorage = (dataArr) => {
   const updateDataString = JSON.stringify(dataArr);
   localStorage.setItem("inputData", updateDataString);
@@ -36,9 +35,10 @@ const updateLocalStorage = (dataArr) => {
 function showTask() {
   taskItemContainer.innerHTML = "";
 
-  let dataArr = JSON.parse(localStorage.getItem("inputData"));
+  // dataArr ကို chatgpt ပြောစကားအရ null အဖြစ်မခံတော့ပဲ localStorage ထဲမှာ data မရှိရင်တောင် arr အလွတ်တစ်ခု ရအောင်လုပ်ထားတာ if နဲ့စစ်တယ့်အခါ dataArr ကို null/falsy ဆိုတာထက် dataArr ထဲမှာ data မရှိဘူးဆိုတာက ဖတ်ရတာ ပိုလွယ်စေတယ်
+  let dataArr = JSON.parse(localStorage.getItem("inputData")) || [];
   // localStorage ထဲမှာ data ရှိ/မရှိ အရင်စစ် ဘာလို့ဆို မရှိတာကို မစစ်ထားဘဲ ဆွဲထုတ်ပြီး filter လုပ်မယ်ဆိုရင် error တွေတက်လာမယ် အဲ့တော့ မရှိရင် ဘာအလုပ်မှဆက်မလုပ်ဘူး ဆိုပြီး စစ်ထားလိုက်
-  if (!dataArr) {
+  if (dataArr.length == 0) {
     return;
   }
 
